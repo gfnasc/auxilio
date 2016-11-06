@@ -53,5 +53,110 @@ class Medicamento
     private $principioAtivoCod;
 
 
-}
 
+    /**
+     * Get cod
+     *
+     * @return integer
+     */
+    public function getCod()
+    {
+        return $this->cod;
+    }
+
+    /**
+     * Set nome
+     *
+     * @param string $nome
+     *
+     * @return Medicamento
+     */
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+
+        return $this;
+    }
+
+    /**
+     * Get nome
+     *
+     * @return string
+     */
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    /**
+     * Set apresentacao
+     *
+     * @param string $apresentacao
+     *
+     * @return Medicamento
+     */
+    public function setApresentacao($apresentacao)
+    {
+        $this->apresentacao = $apresentacao;
+
+        return $this;
+    }
+
+    /**
+     * Get apresentacao
+     *
+     * @return string
+     */
+    public function getApresentacao()
+    {
+        return $this->apresentacao;
+    }
+
+    /**
+     * Set qtd
+     *
+     * @param integer $qtd
+     *
+     * @return Medicamento
+     */
+    public function setQtd($qtd)
+    {
+        $this->qtd = $qtd;
+
+        return $this;
+    }
+
+    /**
+     * Get qtd
+     *
+     * @return integer
+     */
+    public function getQtd()
+    {
+        return $this->qtd;
+    }
+
+    /**
+     * Set principioAtivoCod
+     *
+     * @param \AppBundle\Entity\PrincipioAtivo $principioAtivoCod
+     *
+     * @return Medicamento
+     */
+    public function setPrincipioAtivoCod(\AppBundle\Entity\PrincipioAtivo $principioAtivoCod = null)
+    {
+        $this->principioAtivoCod = $principioAtivoCod;
+
+        return $this;
+    }
+
+    /**
+     * Get principioAtivoCod
+     *
+     * @return \AppBundle\Entity\PrincipioAtivo
+     */
+    public function getPrincipioAtivoCod()
+    {
+        return $this->principioAtivoCod;
+    }
+}

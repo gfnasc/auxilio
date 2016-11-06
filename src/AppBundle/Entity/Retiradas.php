@@ -49,5 +49,86 @@ class Retiradas
     private $pacienteCod;
 
 
-}
 
+    /**
+     * Get cod
+     *
+     * @return integer
+     */
+    public function getCod()
+    {
+        return $this->cod;
+    }
+
+    /**
+     * Set data
+     *
+     * @param \DateTime $data
+     *
+     * @return Retiradas
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
+
+        return $this;
+    }
+
+    /**
+     * Get data
+     *
+     * @return \DateTime
+     */
+    public function getData()
+    {
+        return $this->data;
+    }
+
+    /**
+     * Set operadorCod
+     *
+     * @param \AppBundle\Entity\Operador $operadorCod
+     *
+     * @return Retiradas
+     */
+    public function setOperadorCod(\AppBundle\Entity\Operador $operadorCod = null)
+    {
+        $this->operadorCod = $operadorCod;
+
+        return $this;
+    }
+
+    /**
+     * Get operadorCod
+     *
+     * @return \AppBundle\Entity\Operador
+     */
+    public function getOperadorCod()
+    {
+        return $this->operadorCod;
+    }
+
+    /**
+     * Set pacienteCod
+     *
+     * @param \AppBundle\Entity\Paciente $pacienteCod
+     *
+     * @return Retiradas
+     */
+    public function setPacienteCod(\AppBundle\Entity\Paciente $pacienteCod = null)
+    {
+        $this->pacienteCod = $pacienteCod;
+
+        return $this;
+    }
+
+    /**
+     * Get pacienteCod
+     *
+     * @return \AppBundle\Entity\Paciente
+     */
+    public function getPacienteCod()
+    {
+        return $this->pacienteCod;
+    }
+}

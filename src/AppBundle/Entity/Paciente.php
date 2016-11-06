@@ -57,5 +57,134 @@ class Paciente
     private $dataCad;
 
 
-}
 
+    /**
+     * Get cod
+     *
+     * @return integer
+     */
+    public function getCod()
+    {
+        return $this->cod;
+    }
+
+    /**
+     * Set matricula
+     *
+     * @param integer $matricula
+     *
+     * @return Paciente
+     */
+    public function setMatricula($matricula)
+    {
+        $this->matricula = $matricula;
+
+        return $this;
+    }
+
+    /**
+     * Get matricula
+     *
+     * @return integer
+     */
+    public function getMatricula()
+    {
+        return $this->matricula;
+    }
+
+    /**
+     * Set nome
+     *
+     * @param string $nome
+     *
+     * @return Paciente
+     */
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+
+        return $this;
+    }
+
+    /**
+     * Get nome
+     *
+     * @return string
+     */
+    public function getNome()
+    {
+        return $this->nome;
+    }
+
+    /**
+     * Set telefone
+     *
+     * @param string $telefone
+     *
+     * @return Paciente
+     */
+    public function setTelefone($telefone)
+    {
+        $this->telefone = $telefone;
+
+        return $this;
+    }
+
+    /**
+     * Get telefone
+     *
+     * @return string
+     */
+    public function getTelefone()
+    {
+        return $this->telefone;
+    }
+
+    /**
+     * Set dataNasc
+     *
+     * @param \DateTime $dataNasc
+     *
+     * @return Paciente
+     */
+    public function setDataNasc($dataNasc)
+    {
+        $this->dataNasc = $dataNasc;
+
+        return $this;
+    }
+
+    /**
+     * Get dataNasc
+     *
+     * @return \DateTime
+     */
+    public function getDataNasc()
+    {
+        return $this->dataNasc;
+    }
+
+    /**
+     * Set dataCad
+     *
+     * @param \DateTime $dataCad
+     *
+     * @return Paciente
+     */
+    public function setDataCad($dataCad)
+    {
+        $this->dataCad = $dataCad;
+
+        return $this;
+    }
+
+    /**
+     * Get dataCad
+     *
+     * @return \DateTime
+     */
+    public function getDataCad()
+    {
+        return $this->dataCad;
+    }
+}

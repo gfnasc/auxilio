@@ -39,5 +39,62 @@ class Formulario
     private $medicamentoCod;
 
 
-}
 
+    /**
+     * Get cod
+     *
+     * @return integer
+     */
+    public function getCod()
+    {
+        return $this->cod;
+    }
+
+    /**
+     * Set qtdPedir
+     *
+     * @param integer $qtdPedir
+     *
+     * @return Formulario
+     */
+    public function setQtdPedir($qtdPedir)
+    {
+        $this->qtdPedir = $qtdPedir;
+
+        return $this;
+    }
+
+    /**
+     * Get qtdPedir
+     *
+     * @return integer
+     */
+    public function getQtdPedir()
+    {
+        return $this->qtdPedir;
+    }
+
+    /**
+     * Set medicamentoCod
+     *
+     * @param \AppBundle\Entity\Medicamento $medicamentoCod
+     *
+     * @return Formulario
+     */
+    public function setMedicamentoCod(\AppBundle\Entity\Medicamento $medicamentoCod = null)
+    {
+        $this->medicamentoCod = $medicamentoCod;
+
+        return $this;
+    }
+
+    /**
+     * Get medicamentoCod
+     *
+     * @return \AppBundle\Entity\Medicamento
+     */
+    public function getMedicamentoCod()
+    {
+        return $this->medicamentoCod;
+    }
+}

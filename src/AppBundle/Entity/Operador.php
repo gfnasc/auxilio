@@ -43,5 +43,86 @@ class Operador
     private $nome;
 
 
-}
 
+    /**
+     * Get cod
+     *
+     * @return integer
+     */
+    public function getCod()
+    {
+        return $this->cod;
+    }
+
+    /**
+     * Set login
+     *
+     * @param string $login
+     *
+     * @return Operador
+     */
+    public function setLogin($login)
+    {
+        $this->login = $login;
+
+        return $this;
+    }
+
+    /**
+     * Get login
+     *
+     * @return string
+     */
+    public function getLogin()
+    {
+        return $this->login;
+    }
+
+    /**
+     * Set senha
+     *
+     * @param string $senha
+     *
+     * @return Operador
+     */
+    public function setSenha($senha)
+    {
+        $this->senha = $senha;
+
+        return $this;
+    }
+
+    /**
+     * Get senha
+     *
+     * @return string
+     */
+    public function getSenha()
+    {
+        return $this->senha;
+    }
+
+    /**
+     * Set nome
+     *
+     * @param string $nome
+     *
+     * @return Operador
+     */
+    public function setNome($nome)
+    {
+        $this->nome = $nome;
+
+        return $this;
+    }
+
+    /**
+     * Get nome
+     *
+     * @return string
+     */
+    public function getNome()
+    {
+        return $this->nome;
+    }
+}

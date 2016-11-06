@@ -29,5 +29,38 @@ class PrincipioAtivo
     private $principioAtivoNome;
 
 
-}
 
+    /**
+     * Get cod
+     *
+     * @return integer
+     */
+    public function getCod()
+    {
+        return $this->cod;
+    }
+
+    /**
+     * Set principioAtivoNome
+     *
+     * @param string $principioAtivoNome
+     *
+     * @return PrincipioAtivo
+     */
+    public function setPrincipioAtivoNome($principioAtivoNome)
+    {
+        $this->principioAtivoNome = $principioAtivoNome;
+
+        return $this;
+    }
+
+    /**
+     * Get principioAtivoNome
+     *
+     * @return string
+     */
+    public function getPrincipioAtivoNome()
+    {
+        return $this->principioAtivoNome;
+    }
+}

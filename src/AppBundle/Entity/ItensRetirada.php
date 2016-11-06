@@ -49,5 +49,86 @@ class ItensRetirada
     private $retiradasCod;
 
 
-}
 
+    /**
+     * Get cod
+     *
+     * @return integer
+     */
+    public function getCod()
+    {
+        return $this->cod;
+    }
+
+    /**
+     * Set qtdRetirada
+     *
+     * @param integer $qtdRetirada
+     *
+     * @return ItensRetirada
+     */
+    public function setQtdRetirada($qtdRetirada)
+    {
+        $this->qtdRetirada = $qtdRetirada;
+
+        return $this;
+    }
+
+    /**
+     * Get qtdRetirada
+     *
+     * @return integer
+     */
+    public function getQtdRetirada()
+    {
+        return $this->qtdRetirada;
+    }
+
+    /**
+     * Set medicamentoCod
+     *
+     * @param \AppBundle\Entity\Medicamento $medicamentoCod
+     *
+     * @return ItensRetirada
+     */
+    public function setMedicamentoCod(\AppBundle\Entity\Medicamento $medicamentoCod = null)
+    {
+        $this->medicamentoCod = $medicamentoCod;
+
+        return $this;
+    }
+
+    /**
+     * Get medicamentoCod
+     *
+     * @return \AppBundle\Entity\Medicamento
+     */
+    public function getMedicamentoCod()
+    {
+        return $this->medicamentoCod;
+    }
+
+    /**
+     * Set retiradasCod
+     *
+     * @param \AppBundle\Entity\Retiradas $retiradasCod
+     *
+     * @return ItensRetirada
+     */
+    public function setRetiradasCod(\AppBundle\Entity\Retiradas $retiradasCod = null)
+    {
+        $this->retiradasCod = $retiradasCod;
+
+        return $this;
+    }
+
+    /**
+     * Get retiradasCod
+     *
+     * @return \AppBundle\Entity\Retiradas
+     */
+    public function getRetiradasCod()
+    {
+        return $this->retiradasCod;
+    }
+}
