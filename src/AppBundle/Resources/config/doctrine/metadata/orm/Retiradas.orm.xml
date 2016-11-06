@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Retiradas" table="retiradas">
+    <indexes>
+      <index name="fk_retiradas_operador1_idx" columns="operador_cod"/>
+      <index name="fk_retiradas_paciente1_idx" columns="paciente_cod"/>
+    </indexes>
+    <id name="cod" type="integer" column="cod">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="data" type="date" column="data" nullable="false"/>
+    <many-to-one field="operadorCod" target-entity="Operador" fetch="LAZY">
+      <join-columns>
+        <join-column name="operador_cod" referenced-column-name="cod"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="pacienteCod" target-entity="Paciente" fetch="LAZY">
+      <join-columns>
+        <join-column name="paciente_cod" referenced-column-name="cod"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

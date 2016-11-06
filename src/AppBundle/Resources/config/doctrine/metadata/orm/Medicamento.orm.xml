@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Medicamento" table="medicamento">
+    <indexes>
+      <index name="fk_medicamento_principio_ativo_idx" columns="principio_ativo_cod"/>
+    </indexes>
+    <id name="cod" type="integer" column="cod">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="nome" type="string" column="nome" length="45" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="apresentacao" type="string" column="apresentacao" length="20" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="qtd" type="integer" column="qtd" nullable="false">
+      <options>
+        <option name="unsigned"/>
+      </options>
+    </field>
+    <many-to-one field="principioAtivoCod" target-entity="PrincipioAtivo" fetch="LAZY">
+      <join-columns>
+        <join-column name="principio_ativo_cod" referenced-column-name="cod"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>
