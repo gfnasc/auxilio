@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
-    <title></title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-</head>
-<body>
-TELA PRINCIPAL DO PAINEL <a href="{{ path('logout') }}"><input type="submit" value="Logout" /></a>
-</body>
-</html>
+{% extends 'system/includes/base.twig' %}
+
+{% block main %}
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Página inicial</a></li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+
+            <!-- /.box -->
+
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}
