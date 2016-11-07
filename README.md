@@ -19,16 +19,6 @@ composer install
 
 ```
 
-* Baixar dependências do Bower
-
-```
-bower install
-
-```
-
-* Importar o arquivo do banco de dados no MySQL: app/config/bd_auxilio.sql
-
-
 * Configurar parâmetros do Symfony em **parameter.yml**
 
 ```
@@ -42,8 +32,11 @@ parameters:
     database_password: adm456
 ```
 
-* Executar a aplicação
+* Importar o arquivo do banco de dados no MySQL: **app/config/bd_auxilio.sql**
 
+## Executar a aplicação ##
+
+Para executar a aplicação basta navegar com o terminal até a pasta onde foi clonado o projeto e executar o seguinte comando:
 
 ```
 php bin/console server:run
