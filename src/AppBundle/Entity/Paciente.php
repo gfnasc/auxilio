@@ -45,14 +45,14 @@ class Paciente
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="data_nasc", type="date", nullable=false)
+     * @ORM\Column(name="data_nasc", type="datetime", nullable=false)
      */
     private $dataNasc;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="data_cad", type="date", nullable=false)
+     * @ORM\Column(name="data_cad", type="datetime", nullable=false)
      */
     private $dataCad;
 
@@ -66,6 +66,20 @@ class Paciente
     public function getCod()
     {
         return $this->cod;
+    }
+
+    /**
+     * Set matricula
+     *
+     * @param integer $cod
+     *
+     * @return Paciente
+     */
+    public function setCod($cod)
+    {
+        $this->cod = $cod;
+
+        return $this;
     }
 
     /**
