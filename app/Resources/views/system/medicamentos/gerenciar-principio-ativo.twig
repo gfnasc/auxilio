@@ -5,7 +5,64 @@
         <!-- Main content -->
         <section class="content">
 
+            {% if msg is defined %}
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <i class="icon fa fa-check"></i>{{ msg }}.
+                </div>
+            {% endif %}
 
+            <br>
+
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-info btn-flat">Pesquisar</button>
+                    <a href="#"><button type="button" style="padding: 4px 10px;margin-left: 10px;" class="btn btn-flat btn-success">Cadastrar P.A.</button></a>
+                </span>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Princípio Ativo</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body table-responsive no-padding">
+                            <table class="table table-hover">
+                                <tbody>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th></th>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Katchau</td>
+                                        <td style="text-align: right;">
+                                            <a href="#"><button type="button" style="padding: 1px 2px;" class="btn btn-warning">Editar</button></a>
+                                            <a href="#"><button type="button" style="padding: 1px 2px;" class="btn btn-danger">Excluir</button></a>
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Satanás</td>
+                                        <td style="text-align: right;">
+                                            <a href="#"><button type="button" style="padding: 1px 2px;" class="btn btn-warning">Editar</button></a>
+                                            <a href="#"><button type="button" style="padding: 1px 2px;" class="btn btn-danger">Excluir</button></a>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
 
         </section>
         <!-- /.content -->
