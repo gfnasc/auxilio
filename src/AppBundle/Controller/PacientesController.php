@@ -15,7 +15,6 @@ use Symfony\Component\Validator\Constraints\DateTime;
 
 class PacientesController extends Controller
 {
-
     /**
      * @Route("/gerenciar-pacientes", name="gerenciar-pacientes")
      */
