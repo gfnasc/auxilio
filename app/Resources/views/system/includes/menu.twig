@@ -16,8 +16,9 @@
         <ul class="sidebar-menu">
             <li class="header">MENU PRINCIPAL</li>
             <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-home"></i> <span>Página inicial</span>
+                <a href="{{ path('home') }}">
+                    <i class="fa fa-home"></i>
+                    <span>Página Inicial</span>
                 </a>
             </li>
 
@@ -26,8 +27,8 @@
                     <i class="fa fa-medkit"></i>
                     <span>Medicamentos</span>
                     <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="#"><i class="fa fa-circle-o"></i> Gerenciar Princípio Ativo</a></li>
@@ -44,7 +45,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Gerenciar Paciente</a></li>
+                    <li><a href="{{ path('gerenciar-pacientes') }}"><i class="fa fa-circle-o"></i> Gerenciar Paciente</a></li>
                 </ul>
             </li>
 

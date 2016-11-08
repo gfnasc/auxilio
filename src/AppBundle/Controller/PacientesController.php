@@ -39,6 +39,9 @@ class PacientesController extends Controller
 
         $data = $request->request->all();
 
+        $em = $this->getDoctrine()->getManager();
+        $pacientes = $em->getRepository('AppBundle:Paciente')->findAll();
+
         if(!$data){
             return $this->render('system/pacientes/cadastrar-paciente.twig');
         } else {
@@ -54,8 +57,9 @@ class PacientesController extends Controller
             $em->persist($p);
             $em->flush();
 
-            return $this->render('system/gerenciar-pacientes.twig', [
-                'msg' => 'Paciente cadastrado com sucesso!'
+            return $this->render('system/pacientes/gerenciar-pacientes.twig', [
+                'msg' => 'Paciente cadastrado com sucesso!',
+                'pacientes' => $pacientes
             ]);
 
         }
