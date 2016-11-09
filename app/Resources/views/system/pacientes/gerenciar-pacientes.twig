@@ -17,8 +17,10 @@
             <div class="input-group input-group-sm">
                 <input type="text" class="form-control">
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-info btn-flat">Pesquisar</button>
+                    <form action="{{ path('buscar-paciente') }}" method="POST">
+                        <button id="pesquisar" type="submit" class="btn btn-info btn-flat">Pesquisar</button>
                     <a href="{{ path('cadastrar-paciente') }}"><button type="button" style="padding: 4px 10px;margin-left: 10px;" class="btn btn-flat btn-success">Cadastrar Paciente</button></a>
+                    </form>
                 </span>
             </div>
 
@@ -35,7 +37,8 @@
                         <!-- /.box-header -->
                         <div class="box-body table-responsive no-padding">
                             <table class="table table-hover">
-                                <tbody><tr>
+                                <tbody>
+                                <tr>
                                     <th>Matrícula</th>
                                     <th>Nome</th>
                                     <th>Telefone</th>

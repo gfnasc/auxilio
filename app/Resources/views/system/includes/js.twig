@@ -10,5 +10,33 @@
 <script src="{{ asset('dist/js/app.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dist/js/demo.js') }}"></script>
+
+<script type="application/javascript">
+
+    $(document).ready(function () {
+
+        $('#pesquisar').click(function () {
+
+            $.ajax({
+                url: ,
+                data: {
+                    format: 'json'
+                },
+                error: function() {
+                    alert('Erro na busca!');
+                },
+                dataType: 'jsonp',
+                success: function(data) {
+                    alert('busca ok');
+                },
+                type: 'POST'
+            });
+
+        });
+
+    });
+
+</script>
+
 </body>
 </html>
