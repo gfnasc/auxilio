@@ -2,6 +2,7 @@
     "name": "guilherme/auxilio",
     "license": "proprietary",
     "type": "project",
+	"disable-tls": "true",
     "autoload": {
         "psr-4": {
             "": "src/"
