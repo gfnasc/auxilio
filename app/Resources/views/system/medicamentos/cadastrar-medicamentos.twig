@@ -1,0 +1,52 @@
+{% extends 'system/includes/base.twig' %}
+
+{% block main %}
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content">
+
+            <div class="box box-success">
+
+                <form role="form" action="" method="POST">
+
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Cadastrar Medicamento</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <input required="required" name="nome" type="text" class="form-control" placeholder="Digite o nome do medicamento">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Apresentação</label>
+                            <input required="required" name="apresentacao" type="text" class="form-control" placeholder="Digite o nome do medicamento">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Princípio Ativo</label>
+                            <select class="form-control">
+                                <option selected disabled>Escolha o princípio ativo</option>
+                                <option>Cocô</option>
+                                <option>Urina de bode</option>
+                                <option>Esperma de morcego</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="box-footer">
+                        <a href="{{ path('gerenciar-medicamentos') }}"><button type="button" class="btn btn-default">Cancelar</button></a>
+                        <button type="submit" class="btn btn-success pull-right">Cadastrar</button>
+                    </div>
+                    <!-- /.box-body -->
+
+                </form>
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}
