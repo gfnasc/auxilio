@@ -270,6 +270,31 @@ a:focus {
 .main-header .sidebar-toggle .icon-bar {
   display: none;
 }
+
+@media  (min-width: 768px){
+  .main-header .sidebar-toggle {
+  float: left;
+  background-color: transparent;
+  background-image: none;
+  padding: 15px 15px;
+  font-family: fontAwesome;
+  display: none;
+  }
+  .main-header .sidebar-toggle:before {
+    content: "\f0c9";
+  }
+  .main-header .sidebar-toggle:hover {
+    color: #fff;
+  }
+  .main-header .sidebar-toggle:focus,
+  .main-header .sidebar-toggle:active {
+    background: transparent;
+  }
+  .main-header .sidebar-toggle .icon-bar {
+    display: none;
+  }
+}
+
 .main-header .navbar .nav > li.user > a > .fa,
 .main-header .navbar .nav > li.user > a > .glyphicon,
 .main-header .navbar .nav > li.user > a > .ion {
