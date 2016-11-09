@@ -1,0 +1,37 @@
+{% extends 'system/includes/base.twig' %}
+
+{% block main %}
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content">
+
+        	{% if msg is defined %}
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <i class="icon fa fa-check"></i>{{ msg }}.
+                </div>
+            {% endif %}
+
+            <br>
+
+            <div class="input-group input-group-sm">
+                <input type="text" class="form-control">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-info btn-flat">Pesquisar</button>
+                </span>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label>Medicamento</label>
+                    <select class="form-control">
+                        <option selected disabled>Escolha um</option>
+                        <option>Med 1</option>
+                        <option>Med 2</option>
+                        <option>Med 3</option>
+                    </select>
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}
