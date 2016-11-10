@@ -61,4 +61,39 @@ class PrincipioAtivoController extends Controller
         }
     }
 
+    /**
+     * @Route("/editar-principio-ativo/{id}", name="editar-principio-ativo")
+     * @Method({"GET", "POST"})
+     */
+    public function editarAction(Request $request, $id)
+    {
+
+        $data = $request->request->all();
+        var_dump($data);
+        $em = $this->getDoctrine()->getManager();
+        $principio_ativo = $em->getRepository('AppBundle:PrincipioAtivo')->findBy(['cod' => $id]);
+
+        if(!$data){
+            return $this->render('system/principio-ativo/editar-principio-ativo.twig', [
+                'principio_ativo' => $principio_ativo
+            ]);
+        } else {
+
+            $pa = new PrincipioAtivo();
+            $pa->setPrincipioAtivoNome($data['nome']);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->merge($pa);
+            $em->flush();
+
+            $principio_ativo = $em->getRepository('AppBundle:PrincipioAtivo')->findAll();
+
+            return $this->render('system/principio-ativo/gerenciar-principio-ativo.twig', [
+                'msg' => 'Princípio Ativo atualizado com sucesso!',
+                'principio_ativo' => $principio_ativo
+            ]);
+
+        }
+    }
+
 }
