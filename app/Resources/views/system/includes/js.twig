@@ -10,5 +10,43 @@
 <script src="{{ asset('dist/js/app.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('dist/js/demo.js') }}"></script>
+
+<script type="application/javascript">
+
+    $(document).ready(function () {
+
+        $('.loading').hide();
+
+        $('#pesquisar').click(function () {
+
+            $.ajax({
+                url: 'buscar-paciente',
+                type: 'POST',
+                data: {
+                    term: $('#term').val()
+                },
+                dataType: 'json',
+                beforeSend: function () {
+                    $('#content-table').hide();
+                    $('.loading').show();
+                },
+                complete: function () {
+                    $('.loading').hide();
+                    $('#content-table').show();
+                },
+                success: function (data) {
+                    $('#content-table').html(data);
+                },
+                error: function () {
+                    alert("Digite o nome ou a matrícula do paciente.");
+                }
+            });
+
+        });
+
+    });
+
+</script>
+
 </body>
 </html>

@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 /**
  * Paciente
@@ -22,9 +23,9 @@ class Paciente
     private $cod;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="matricula", type="integer", nullable=false)
+     * @ORM\Column(name="matricula", type="string", nullable=false)
      */
     private $matricula;
 
@@ -85,7 +86,7 @@ class Paciente
     /**
      * Set matricula
      *
-     * @param integer $matricula
+     * @param string $matricula
      *
      * @return Paciente
      */
@@ -99,7 +100,7 @@ class Paciente
     /**
      * Get matricula
      *
-     * @return integer
+     * @return string
      */
     public function getMatricula()
     {
@@ -163,7 +164,7 @@ class Paciente
      */
     public function setDataNasc($dataNasc)
     {
-        $this->dataNasc = $dataNasc;
+        $this->dataNasc = DateTime::createFromFormat('Y-m-d', $dataNasc, new \DateTimeZone('America/Sao_Paulo'));
 
         return $this;
     }
