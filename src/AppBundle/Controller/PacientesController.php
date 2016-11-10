@@ -181,7 +181,7 @@ class PacientesController extends Controller
                     <td>'.$paciente->getTelefone().'</td>
                     <td>'.date_format($paciente->getDataNasc(), "Y-m-d").'</td>
                     <td>'.date_format($paciente->getDataCad(), "Y-m-d").'</td>
-                    <td>
+                    <td style="text-align: right;">
                         <a href="editar-paciente/'.$paciente->getCod().'"><button type="button" style="padding: 1px 2px;" class="btn btn-warning btn-flat">Editar</button></a>
                         <a href="deletar-paciente/'.$paciente->getCod().'"><button type="button" style="padding: 1px 2px;" class="btn btn-danger btn-flat">Excluir</button></a>
                     </td>
