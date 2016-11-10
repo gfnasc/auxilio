@@ -15,12 +15,14 @@
             <br>
 
             <div class="input-group input-group-sm">
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" id="term" placeholder="Digite o nome do princípio ativo">
                 <span class="input-group-btn">
-                    <button type="button" class="btn btn-info btn-flat">Pesquisar</button>
+                    <button id="pesquisar" type="button" class="btn btn-info btn-flat">Pesquisar</button>
                     <a href="{{ path('cadastrar-principio-ativo') }}"><button type="button" style="padding: 4px 10px;margin-left: 10px;" class="btn btn-flat btn-success">Cadastrar P.A.</button></a>
                 </span>
             </div>
+
+
 
             <br>
 
@@ -28,32 +30,32 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">Princípio Ativo</h3>
+                            <h3 class="box-title">Princípio Ativo </h3>
+                        </div>
+                        <div class="row loading" style="width: 98%; margin-left: 10px;">
+                            <h3>Carregando...</h3>
+                            <div class="progress progress-striped active page-progress-bar">
+                                <div class="progress-bar" style="width: 100%;"></div>
+                            </div>
                         </div>
                         <!-- /.box-header -->
-                        <div class="box-body table-responsive no-padding">
+                        <div id="content-table" class="box-body table-responsive no-padding">
                             <table class="table table-hover">
                                 <tbody>
-                                    <tr>
-                                        <th>Nome</th>
-                                        <th></th>
-                                    </tr>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th></th>
+                                </tr>
 
+                                {% for pa in principio_ativo %}
                                     <tr>
-                                        <td>Katchau</td>
-                                        <td>
-                                            <a href="#"><button type="button" style="padding: 1px 2px;" class="btn btn-warning">Editar</button></a>
-                                            <a href="#"><button type="button" style="padding: 1px 2px;" class="btn btn-danger">Excluir</button></a>
+                                        <td>{{ pa.principioAtivoNome }}</td>
+                                        <td style="text-align: right;">
+                                            <a href="#"><button type="button" style="padding: 1px 2px;" class="btn btn-warning btn-flat">Editar</button></a>
+                                            <a href="#"><button type="button" style="padding: 1px 2px;" class="btn btn-danger btn-flat">Excluir</button></a>
                                         </td>
                                     </tr>
-
-                                    <tr>
-                                        <td>Satanás</td>
-                                        <td>
-                                            <a href="#"><button type="button" style="padding: 1px 2px;" class="btn btn-warning">Editar</button></a>
-                                            <a href="#"><button type="button" style="padding: 1px 2px;" class="btn btn-danger">Excluir</button></a>
-                                        </td>
-                                    </tr>
+                                {% endfor %}
 
                                 </tbody>
                             </table>

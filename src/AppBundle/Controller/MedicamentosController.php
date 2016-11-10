@@ -14,33 +14,6 @@ use Symfony\Component\Validator\Constraints\Date;
 use Symfony\Component\Validator\Constraints\DateTime;
 class MedicamentosController extends Controller
 {
-    /**
-     * @Route("/gerenciar-principio-ativo", name="gerenciar-principio-ativo")
-     */
-    public function listarAction()
-    {
-
-        $em = $this->getDoctrine()->getManager();
-        $medicamentos = $em->getRepository('AppBundle:Medicamento')->findAll();
-
-        return $this->render('system/medicamentos/gerenciar-principio-ativo.twig', [
-            'medicamentos' => $medicamentos
-        ]);
-    }
-
-    /**
-     * @Route("/cadastrar-principio-ativo", name="cadastrar-principio-ativo")
-     */
-    public function cadastrarAction()
-    {
-
-        $em = $this->getDoctrine()->getManager();
-        $medicamentos = $em->getRepository('AppBundle:Medicamento')->findAll();
-
-        return $this->render('system/medicamentos/cadastrar-principio-ativo.twig', [
-            'medicamentos' => $medicamentos
-        ]);
-    }
 
     /**
      * @Route("/gerenciar-medicamentos", name="gerenciar-medicamentos")
