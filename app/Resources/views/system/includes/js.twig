@@ -15,21 +15,31 @@
 
     $(document).ready(function () {
 
+        $('.loading').hide();
+
         $('#pesquisar').click(function () {
 
             $.ajax({
-                url: ,
+                url: 'buscar-paciente',
+                type: 'POST',
                 data: {
-                    format: 'json'
+                    term: $('#term').val()
                 },
-                error: function() {
-                    alert('Erro na busca!');
+                dataType: 'json',
+                beforeSend: function () {
+                    $('#content-table').hide();
+                    $('.loading').show();
                 },
-                dataType: 'jsonp',
-                success: function(data) {
-                    alert('busca ok');
+                complete: function () {
+                    $('.loading').hide();
+                    $('#content-table').show();
                 },
-                type: 'POST'
+                success: function (data) {
+                    $('#content-table').html(data);
+                },
+                error: function () {
+                    alert("Digite o nome ou a matrícula do paciente.");
+                }
             });
 
         });
