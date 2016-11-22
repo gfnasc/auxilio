@@ -69,21 +69,20 @@ class PrincipioAtivoController extends Controller
     {
 
         $data = $request->request->all();
-        var_dump($data);
-        $em = $this->getDoctrine()->getManager();
-        $principio_ativo = $em->getRepository('AppBundle:PrincipioAtivo')->findBy(['cod' => $id]);
 
         if(!$data){
+
+            $em = $this->getDoctrine()->getManager();
+            $principio_ativo = $em->getRepository('AppBundle:PrincipioAtivo')->findBy(['cod' => $id]);
+
             return $this->render('system/principio-ativo/editar-principio-ativo.twig', [
                 'principio_ativo' => $principio_ativo
             ]);
         } else {
 
-            $pa = new PrincipioAtivo();
-            $pa->setPrincipioAtivoNome($data['nome']);
-
             $em = $this->getDoctrine()->getManager();
-            $em->merge($pa);
+            $pa = $em->getRepository('AppBundle:PrincipioAtivo')->find($id);
+            $pa->setPrincipioAtivoNome($data['nome']);
             $em->flush();
 
             $principio_ativo = $em->getRepository('AppBundle:PrincipioAtivo')->findAll();
