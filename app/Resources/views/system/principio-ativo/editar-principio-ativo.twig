@@ -1,0 +1,37 @@
+{% extends 'system/includes/base.twig' %}
+
+{% block main %}
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content">
+
+            <div class="box box-success">
+
+                <form role="form" action="{{ path('editar-principio-ativo', {'id' : principio_ativo.0.cod}) }}" method="POST">
+
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Editar Princípio Ativo</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <input value="{{ principio_ativo.0.principioAtivoNome }}" name="nome" type="text" class="form-control" placeholder="Digite o número de matrícula do paciente">
+                        </div>
+
+                    </div>
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-default">Cancelar</button>
+                        <button type="submit" class="btn btn-success pull-right">Cadastrar</button>
+                    </div>
+                    <!-- /.box-body -->
+
+                </form>
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}

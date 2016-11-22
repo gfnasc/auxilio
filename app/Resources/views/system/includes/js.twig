@@ -17,10 +17,67 @@
 
         $('.loading').hide();
 
+        //AJAX para busca de pacientes
         $('#pesquisar').click(function () {
 
             $.ajax({
                 url: 'buscar-paciente',
+                type: 'POST',
+                data: {
+                    term: $('#term').val()
+                },
+                dataType: 'json',
+                beforeSend: function () {
+                    $('#content-table').hide();
+                    $('.loading').show();
+                },
+                complete: function () {
+                    $('.loading').hide();
+                    $('#content-table').show();
+                },
+                success: function (data) {
+                    $('#content-table').html(data);
+                },
+                error: function () {
+                    alert("Digite o nome ou a matrícula do paciente.");
+                }
+            });
+
+        });
+
+        //AJAX para busca de princípio ativo
+        $('#pesquisar-pa').click(function () {
+
+            $.ajax({
+                url: 'buscar-principio-ativo',
+                type: 'POST',
+                data: {
+                    term: $('#term').val()
+                },
+                dataType: 'json',
+                beforeSend: function () {
+                    $('#content-table').hide();
+                    $('.loading').show();
+                },
+                complete: function () {
+                    $('.loading').hide();
+                    $('#content-table').show();
+                },
+                success: function (data) {
+                    $('#content-table').html(data);
+                },
+                error: function () {
+                    alert("Digite o nome ou a matrícula do paciente.");
+                }
+            });
+
+        });
+
+        //AJAX para busca de medicamentos
+        $('#pesquisar-medicamento').click(function () {
+
+            $.ajax({
+                url: 'buscar-medicamento',
                 type: 'POST',
                 data: {
                     term: $('#term').val()
