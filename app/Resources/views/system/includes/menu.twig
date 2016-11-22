@@ -57,7 +57,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Entrada de Medicamentos</a></li>
+                    <li><a href="{{ path('entrada-medicamentos') }}"><i class="fa fa-circle-o"></i> Entrada de Medicamentos</a></li>
                 </ul>
             </li>
 
@@ -77,13 +77,13 @@
             </li>
 
             <li class="treeview">
-                <a href="#">
+                <a href="{{ path('retirar-medicamentos') }}">
                     <i class="fa fa-cog"></i> <span>Retirar Medicamentos</span>
                 </a>
             </li>
 
             <li class="treeview">
-                <a href="#">
+                <a href="{{ path('solicitar-medicamentos') }}">
                     <i class="fa fa-bullhorn"></i> <span>Solicitar Medicamento</span>
                 </a>
             </li>

@@ -1,0 +1,50 @@
+{% extends 'system/includes/base.twig' %}
+
+{% block main %}
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content">
+
+        	{% if msg is defined %}
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <i class="icon fa fa-check"></i>{{ msg }}.
+                </div>
+            {% endif %}
+
+            <br>
+            
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Entrada de Medicamentos</h3>
+                </div>
+                    <!-- form start -->
+                    <form role="form">
+                      <div class="box-body">
+                        <div class="form-group">
+                          <label>Nº da Nota Fiscal</label>
+                          <input type="text" class="form-control" id="numero-nf" placeholder="Digite o número da nota fiscal">
+                        </div>
+
+                        <div class="form-group">
+                          <label>Quantidade</label>
+                          <input type="text" class="form-control" id="qtd" placeholder="Digite a quantidade">
+                        </div>
+
+                        <div class="form-group">
+                          <label>Validade</label>
+                          <input type="date" class="form-control" id="data-validade">
+                        </div>
+
+                      <div class="box-footer">
+                        <button type="submit" class="btn btn-success btn-flat">Inserir</button>
+                      </div>
+                    </form>
+                  </div>
+                  <!-- /.box -->
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}

@@ -27,4 +27,18 @@ class EstoqueController extends Controller
             'estoque' => $estoque
         ]);
     }
+
+    /**
+     * @Route("/inserir-medicamentos", name="inserir-medicamentos")
+     */
+    public function listarTesteAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $estoque = $em->getRepository('AppBundle:Medicamento')->findAll();
+
+        return $this->render('system/estoque/inserir-medicamentos.twig', [
+            'estoque' => $estoque
+        ]);
+    }
 }
