@@ -28,11 +28,11 @@
 
                         <div class="form-group">
                             <label>Princípio Ativo</label>
-                            <select class="form-control">
-                                <option selected disabled>Escolha o princípio ativo</option>
-                                <option>Cocô</option>
-                                <option>Urina de bode</option>
-                                <option>Esperma de morcego</option>
+                            <select class="form-control" name="pa">
+                                <option>Escolha o princípio ativo</option>
+                                {% for pa in pas %}
+                                    <option value="{{ pa.cod }}">{{ pa.principioAtivoNome }}</option>
+                                {% endfor %}
                             </select>
                         </div>
 

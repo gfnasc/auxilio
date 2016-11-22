@@ -3,7 +3,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\AppBundle;
+use AppBundle\Entity\Medicamento;
 use AppBundle\Entity\Paciente;
+use AppBundle\Entity\PrincipioAtivo;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -31,15 +33,43 @@ class MedicamentosController extends Controller
 
     /**
      * @Route("/cadastrar-medicamentos", name="cadastrar-medicamentos")
+     * @Method({"GET", "POST"})
      */
-    public function cadastrarMedicamentosAction()
+    public function cadastrarMedicamentosAction(Request $request)
     {
 
-        $em = $this->getDoctrine()->getManager();
-        $medicamentos = $em->getRepository('AppBundle:Medicamento')->findAll();
+        $data = $request->request->all();
 
-        return $this->render('system/medicamentos/cadastrar-medicamentos.twig', [
-            'medicamentos' => $medicamentos
-        ]);
+        if(!$data){
+            $em = $this->getDoctrine()->getManager();
+            $pas = $em->getRepository('AppBundle:PrincipioAtivo')->findAll();
+
+            return $this->render('system/medicamentos/cadastrar-medicamentos.twig', [
+                'pas' => $pas
+            ]);
+        } else {
+
+            $em = $this->getDoctrine()->getManager();
+
+            $med = new Medicamento();
+            $med->setApresentacao($data['apresentacao']);
+            $med->setNome($data['nome']);
+            $med->setPrincipioAtivoCod($em->getReference('AppBundle:PrincipioAtivo', $data['pa']));
+            $med->setQtd(10);
+
+            $em->persist($med);
+            $em->flush();
+
+            $medicamentos = $em->getRepository('AppBundle:Medicamento')->findAll();
+
+            return $this->render('system/medicamentos/gerenciar-medicamentos.twig', [
+                'msg' => 'Medicamento cadastrado com sucesso!',
+                'medicamentos' => $medicamentos
+            ]);
+
+        }
+
     }
+
+
 }
