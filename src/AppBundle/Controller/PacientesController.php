@@ -75,16 +75,19 @@ class PacientesController extends Controller
     {
 
         $data = $request->request->all();
-        $em = $this->getDoctrine()->getManager();
-        $paciente = $em->getRepository('AppBundle:Paciente')->findBy(['cod' => $id]);
 
         if(!$data){
+
+            $em = $this->getDoctrine()->getManager();
+            $paciente = $em->getRepository('AppBundle:Paciente')->findBy(['cod' => $id]);
+
             return $this->render('system/pacientes/editar-paciente.twig', [
                 'paciente' => $paciente
             ]);
         } else {
 
-            $p = new Paciente();
+            $em = $this->getDoctrine()->getManager();
+            $p = $em->getRepository('AppBundle:Paciente')->find($id);
             $p->setCod($id);
             $p->setMatricula($data['matricula']);
             $p->setNome($data['nome']);
@@ -92,8 +95,6 @@ class PacientesController extends Controller
             $p->setDataNasc($data['data-nascimento']);
             $p->setDataCad(new \DateTime('now'));
 
-            $em = $this->getDoctrine()->getManager();
-            $em->merge($p);
             $em->flush();
 
             $pacientes = $em->getRepository('AppBundle:Paciente')->findAll();
