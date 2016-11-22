@@ -71,5 +71,43 @@ class MedicamentosController extends Controller
 
     }
 
+    /**
+     * @Route("/editar-medicamento/{id}", name="editar-medicamento")
+     * @Method({"GET", "POST"})
+     */
+    public function editarAction(Request $request, $id)
+    {
+
+        $data = $request->request->all();
+
+        if(!$data){
+
+            $em = $this->getDoctrine()->getManager();
+            $med = $em->getRepository('AppBundle:Medicamento')->findBy(['cod' => $id]);
+            $pas = $em->getRepository('AppBundle:PrincipioAtivo')->findAll();
+
+            return $this->render('system/medicamentos/editar-medicamento.twig', [
+                'med' => $med,
+                'pas' => $pas
+            ]);
+        } else {
+
+            $em = $this->getDoctrine()->getManager();
+            $med = $em->getRepository('AppBundle:Medicamento')->find($id);
+            $med->setNome($data['nome']);
+            $med->setApresentacao($data['apresentacao']);
+            $med->setPrincipioAtivoCod($em->getReference('AppBundle:PrincipioAtivo', $data['pa']));
+            $em->flush();
+
+            $medicamentos = $em->getRepository('AppBundle:Medicamento')->findAll();
+
+            return $this->render('system/medicamentos/gerenciar-medicamentos.twig', [
+                'msg' => 'Medicamento atualizado com sucesso!',
+                'medicamentos' => $medicamentos
+            ]);
+
+        }
+    }
+
 
 }

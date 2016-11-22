@@ -1,0 +1,54 @@
+{% extends 'system/includes/base.twig' %}
+
+{% block main %}
+
+    {{ dump(med) }}
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content">
+
+            <div class="box box-success">
+
+                <form role="form" action="{{ path('editar-medicamento', {'id' : med.0.cod}) }}" method="POST">
+
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Editar Medicamento</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <input value="{{ med.0.nome }}" required="required" name="nome" type="text" class="form-control" placeholder="Digite o nome do medicamento">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Apresentação</label>
+                            <input value="{{ med.0.apresentacao }}" required="required" name="apresentacao" type="text" class="form-control" placeholder="Digite o nome do medicamento">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Princípio Ativo</label>
+                            <select class="form-control" name="pa">
+                                <option>Escolha o princípio ativo</option>
+                                {% for pa in pas %}
+                                    <option {% if pa.cod == med.0.principioAtivoCod.cod %} selected="selected" {% endif %} value="{{ pa.cod }}">{{ pa.principioAtivoNome }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="box-footer">
+                        <button type="button" class="btn btn-default">Cancelar</button>
+                        <button type="submit" class="btn btn-success pull-right">Cadastrar</button>
+                    </div>
+                    <!-- /.box-body -->
+
+                </form>
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </div>
+{% endblock %}
