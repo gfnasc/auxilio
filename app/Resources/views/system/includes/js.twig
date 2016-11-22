@@ -44,6 +44,33 @@
 
         });
 
+        $('#pesquisar-pa').click(function () {
+
+            $.ajax({
+                url: 'buscar-principio-ativo',
+                type: 'POST',
+                data: {
+                    term: $('#term').val()
+                },
+                dataType: 'json',
+                beforeSend: function () {
+                    $('#content-table').hide();
+                    $('.loading').show();
+                },
+                complete: function () {
+                    $('.loading').hide();
+                    $('#content-table').show();
+                },
+                success: function (data) {
+                    $('#content-table').html(data);
+                },
+                error: function () {
+                    alert("Digite o nome ou a matrícula do paciente.");
+                }
+            });
+
+        });
+
     });
 
 </script>

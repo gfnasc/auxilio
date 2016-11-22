@@ -17,7 +17,7 @@
             <div class="input-group input-group-sm">
                 <input type="text" class="form-control" id="term" placeholder="Digite o nome do princípio ativo">
                 <span class="input-group-btn">
-                    <button id="pesquisar" type="button" class="btn btn-info btn-flat">Pesquisar</button>
+                    <button id="pesquisar-pa" type="button" class="btn btn-info btn-flat">Pesquisar</button>
                     <a href="{{ path('cadastrar-principio-ativo') }}"><button type="button" style="padding: 4px 10px;margin-left: 10px;" class="btn btn-flat btn-success">Cadastrar P.A.</button></a>
                 </span>
             </div>
@@ -52,7 +52,7 @@
                                         <td>{{ pa.principioAtivoNome }}</td>
                                         <td style="text-align: right;">
                                             <a href="{{ path('editar-principio-ativo', {'id' : pa.cod}) }}"><button type="button" style="padding: 1px 2px;" class="btn btn-warning btn-flat">Editar</button></a>
-                                            <a href="#"><button type="button" style="padding: 1px 2px;" class="btn btn-danger btn-flat">Excluir</button></a>
+                                            <a href="{{ path('deletar-principio-ativo', {'id' : pa.cod}) }}"><button type="button" style="padding: 1px 2px;" class="btn btn-danger btn-flat">Excluir</button></a>
                                         </td>
                                     </tr>
                                 {% endfor %}
