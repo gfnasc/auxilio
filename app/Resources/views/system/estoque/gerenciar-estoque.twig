@@ -14,21 +14,22 @@
 
             <br>
 
-            <div class="input-group input-group-sm">
-                <input type="text" class="form-control">
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-info btn-flat">Pesquisar</button>
-                </span>
-            </div>
-            <br/>
-            
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Entrada de Medicamentos</h3>
+                    <h3 class="box-title">Medicamentos Cadastrados</h3>
                 </div>
 
                 <table class="table table-hover">
                     <tbody>
+                        <tr>
+                            <div class="input-group input-group-sm">
+                                <input type="text" class="form-control" placeholder="Busca de medicamentos cadastrados">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-info btn-flat">Pesquisar</button>
+                                </span>
+                            </div>
+                        </tr>
+
                         <tr>
                             <th>Nome</th>
                             <th>Apresentação</th>
@@ -48,6 +49,44 @@
                             </td>
                         </tr>
                         {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <br>
+
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Entrada de Medicamentos</h3>
+                </div>
+
+                <table class="table table-hover">
+                    <tbody>
+                    <tr colspan="6">
+                        <div class="input-group input-group-sm">
+                            <input type="text" class="form-control" placeholder="Busca de entradas de medicamentos lançadas">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-info btn-flat">Pesquisar</button>
+                            </span>
+                        </div>
+                    </tr>
+                    <tr>
+                        <th>Nota Fiscal</th>
+                        <th>Medicamento</th>
+                        <th>Quantidade</th>
+                        <th>Data de entrada</th>
+                        <th>Validade do lote</th>
+                    </tr>
+
+                    {% for ent in entradas %}
+                        <tr>
+                            <td>{{ ent.numeroNf }}</td>
+                            <td>{{ ent.medicamentoCod.nome }}</td>
+                            <td>{{ ent.qtdEntrada }}</td>
+                            <td>{{ ent.dataEntrada|date('d/m/Y') }}</td>
+                            <td>{{ ent.validadeLote|date('d/m/Y') }}</td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>

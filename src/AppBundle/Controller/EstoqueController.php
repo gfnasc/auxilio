@@ -25,9 +25,11 @@ class EstoqueController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $medicamentos = $em->getRepository('AppBundle:Medicamento')->findAll();
+        $entradas = $em->getRepository('AppBundle:Entradas')->findAll();
 
         return $this->render('system/estoque/gerenciar-estoque.twig', [
-            'medicamentos' => $medicamentos
+            'medicamentos' => $medicamentos,
+            'entradas' => $entradas
         ]);
     }
 
@@ -65,12 +67,16 @@ class EstoqueController extends Controller
             $em->flush();
 
             //Atualiza a quantidade na tabela de medicamentos
+            $med = $em->getRepository('AppBundle:Medicamento')->find($id);
+            $med->setQtd((integer)$med->getQtd() + (integer)$data['quantidade']);
+            $em->flush();
 
-            $medicamento = $em->getRepository('AppBundle:Medicamento')->find($id);
 
-            return $this->render('system/estoque/inserir-estoque.twig', [
+            $medicamentos = $em->getRepository('AppBundle:Medicamento')->findAll();
+
+            return $this->render('system/estoque/gerenciar-estoque.twig', [
                 'msg' => 'Entrada efetuada com sucesso!',
-                'medicamento' => $medicamento
+                'medicamentos' => $medicamentos
             ]);
 
         }
