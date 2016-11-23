@@ -56,7 +56,7 @@ class MedicamentosController extends Controller
             $med->setApresentacao($data['apresentacao']);
             $med->setNome($data['nome']);
             $med->setPrincipioAtivoCod($em->getReference('AppBundle:PrincipioAtivo', $data['pa']));
-            $med->setQtd(10);
+            $med->setQtd(0);
 
             $em->persist($med);
             $em->flush();
