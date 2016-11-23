@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 /**
  * Entradas
@@ -31,7 +32,7 @@ class Entradas
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="data_entrada", type="date", nullable=false)
+     * @ORM\Column(name="data_entrada", type="datetime", nullable=false)
      */
     private $dataEntrada;
 
@@ -45,7 +46,7 @@ class Entradas
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="validade_lote", type="date", nullable=false)
+     * @ORM\Column(name="validade_lote", type="datetime", nullable=false)
      */
     private $validadeLote;
 
@@ -152,7 +153,7 @@ class Entradas
      */
     public function setValidadeLote($validadeLote)
     {
-        $this->validadeLote = $validadeLote;
+        $this->validadeLote = \DateTime::createFromFormat('Y-m-d', $validadeLote, new \DateTimeZone('America/Sao_Paulo'));
 
         return $this;
     }
