@@ -140,7 +140,7 @@ class EstoqueController extends Controller
                     <td>'.$med->getQtd().'</td>
                     <td style="text-align: right;">
                         <a href="inserir-medicamentos/'.$med->getCod().'"><button type="button" style="padding: 1px 2px;" class="btn btn-success btn-flat">Inserir</button></a>
-                        <a href="inserir-medicamentos/'.$med->getCod().'"><button type="button" style="padding: 1px 2px;" class="btn btn-warning btn-flat">Entrdas já cadastradas</button></a>
+                        <a href="lista-entradas/'.$med->getCod().'"><button type="button" style="padding: 1px 2px;" class="btn btn-warning btn-flat">Entrdas já cadastradas</button></a>
                     </td>
                 </tr>
             ';
