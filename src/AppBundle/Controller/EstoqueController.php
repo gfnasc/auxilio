@@ -80,6 +80,11 @@ class EstoqueController extends Controller
                 'medicamentos' => $medicamentos
             ]);
 
+//            return $this->redirectToRoute('entrada-medicamentos', [
+//                'msg' => 'Entrada efetuada com sucesso!',
+//                'medicamentos' => $medicamentos
+//            ]);
+
         }
 
     }
@@ -134,8 +139,8 @@ class EstoqueController extends Controller
                     <td>'.$med->getPrincipioAtivoCod()->getPrincipioAtivoNome().'</td>
                     <td>'.$med->getQtd().'</td>
                     <td style="text-align: right;">
-                        <a href="editar-principio-ativo/'.$med->getCod().'"><button type="button" style="padding: 1px 2px;" class="btn btn-warning btn-flat">Editar</button></a>
-                        <a href="deletar-principio-ativo/'.$med->getCod().'"><button type="button" style="padding: 1px 2px;" class="btn btn-danger btn-flat">Excluir</button></a>
+                        <a href="inserir-medicamentos/'.$med->getCod().'"><button type="button" style="padding: 1px 2px;" class="btn btn-success btn-flat">Inserir</button></a>
+                        <a href="inserir-medicamentos/'.$med->getCod().'"><button type="button" style="padding: 1px 2px;" class="btn btn-warning btn-flat">Entrdas já cadastradas</button></a>
                     </td>
                 </tr>
             ';
@@ -149,4 +154,30 @@ class EstoqueController extends Controller
 
         return new JsonResponse($html);
     }
+
+    /**
+     * @Route("/lista-entradas/{id}", name="lista-entradas")
+     * @Method({"GET", "POST"})
+     */
+    public function listarEntradasPorMedicamento($id)
+    {
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $qb = $em->createQueryBuilder();
+        $entradas = $qb->select('e')
+            ->from('AppBundle:Entradas', 'e')
+            ->where('e.medicamentoCod = :id')
+            ->setParameter(':id', $id)
+            ->orderBy('e.dataEntrada', 'DESC')
+            ->getQuery()->getResult();
+
+        $medicamento = $em->getRepository('AppBundle:Medicamento')->find($id);
+
+        return $this->render('system/estoque/listar-entradas.twig', [
+            'entradas' => $entradas,
+            'medicamento' => $medicamento
+        ]);
+
+    }
+
 }
