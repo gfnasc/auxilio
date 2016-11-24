@@ -14,22 +14,36 @@
 
             <br>
 
+            Buscar por:
+            <select class="form-control" style="width: 200px;" id="tipo_busca">
+                <option value="1">Nome do Medicamento</option>
+                <option value="2">Pricípio Ativo</option>
+            </select>
+
+            <br>
+
+            <div class="input-group input-group-sm">
+                <input id="term" type="text" class="form-control" placeholder="Busca de medicamentos cadastrados">
+                <span class="input-group-btn">
+                    <button id="pesquisar-estoque" type="button" class="btn btn-info btn-flat">Pesquisar</button>
+                </span>
+            </div>
+
+            <br>
+
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Medicamentos Cadastrados</h3>
                 </div>
+                <div class="row loading" style="width: 98%; margin-left: 10px;">
+                    <h3>Carregando...</h3>
+                    <div class="progress progress-striped active page-progress-bar">
+                        <div class="progress-bar" style="width: 100%;"></div>
+                    </div>
+                </div>
 
-                <table class="table table-hover">
+                <table class="table table-hover" id="content-table">
                     <tbody>
-                        <tr>
-                            <div class="input-group input-group-sm">
-                                <input type="text" class="form-control" placeholder="Busca de medicamentos cadastrados">
-                                <span class="input-group-btn">
-                                    <button type="button" class="btn btn-info btn-flat">Pesquisar</button>
-                                </span>
-                            </div>
-                        </tr>
-
                         <tr>
                             <th>Nome</th>
                             <th>Apresentação</th>
@@ -46,6 +60,7 @@
                             <td>{{ med.qtd }}</td>
                             <td style="text-align: right;">
                                 <a href="{{ path('inserir-medicamentos', {'id' : med.cod}) }}"><button type="button" style="padding: 1px 2px;" class="btn btn-success btn-flat">Inserir</button></a>
+                                <a href="{{ path('inserir-medicamentos', {'id' : med.cod}) }}"><button type="button" style="padding: 1px 2px;" class="btn btn-warning btn-flat">Entrdas já cadastradas</button></a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -55,41 +70,43 @@
 
             <br>
 
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">Entrada de Medicamentos</h3>
-                </div>
+            {#{{ dump(entradas) }}#}
+            {#<div class="box">#}
+                {#<div class="box-header with-border">#}
+                    {#<h3 class="box-title">Entrada de Medicamentos</h3>#}
+                {#</div>#}
 
-                <table class="table table-hover">
-                    <tbody>
-                    <tr colspan="6">
-                        <div class="input-group input-group-sm">
-                            <input type="text" class="form-control" placeholder="Busca de entradas de medicamentos lançadas">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-info btn-flat">Pesquisar</button>
-                            </span>
-                        </div>
-                    </tr>
-                    <tr>
-                        <th>Nota Fiscal</th>
-                        <th>Medicamento</th>
-                        <th>Quantidade</th>
-                        <th>Data de entrada</th>
-                        <th>Validade do lote</th>
-                    </tr>
+                {#<div class="row loading" style="width: 98%; margin-left: 10px;">#}
+                    {#<h3>Carregando...</h3>#}
+                    {#<div class="progress progress-striped active page-progress-bar">#}
+                        {#<div class="progress-bar" style="width: 100%;"></div>#}
+                    {#</div>#}
+                {#</div>#}
 
-                    {% for ent in entradas %}
-                        <tr>
-                            <td>{{ ent.numeroNf }}</td>
-                            <td>{{ ent.medicamentoCod.nome }}</td>
-                            <td>{{ ent.qtdEntrada }}</td>
-                            <td>{{ ent.dataEntrada|date('d/m/Y') }}</td>
-                            <td>{{ ent.validadeLote|date('d/m/Y') }}</td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                {#<table class="table table-hover">#}
+                    {#<tbody>#}
+                    {#<tr>#}
+                        {#<th>Nota Fiscal</th>#}
+                        {#<th>Medicamento</th>#}
+                        {#<th>Princípio Ativo</th>#}
+                        {#<th>Quantidade</th>#}
+                        {#<th>Data de entrada</th>#}
+                        {#<th>Validade do lote</th>#}
+                    {#</tr>#}
+
+                    {#{% for ent in entradas %}#}
+                        {#<tr>#}
+                            {#<td>{{ ent.numeroNf }}</td>#}
+                            {#<td>{{ ent.medicamentoCod.nome }}</td>#}
+                            {#<td>{{ ent.medicamentoCod.principioAtivoCod.principioAtivoNome }}</td>#}
+                            {#<td>{{ ent.qtdEntrada }}</td>#}
+                            {#<td>{{ ent.dataEntrada|date('d/m/Y') }}</td>#}
+                            {#<td>{{ ent.validadeLote|date('d/m/Y') }}</td>#}
+                        {#</tr>#}
+                    {#{% endfor %}#}
+                    {#</tbody>#}
+                {#</table>#}
+            {#</div>#}
 
         </section>
         <!-- /.content -->

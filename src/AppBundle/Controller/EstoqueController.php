@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use DateTime;
 use Symfony\Component\Validator\Constraints\Date;
 use Carbon\Carbon;
@@ -81,5 +82,71 @@ class EstoqueController extends Controller
 
         }
 
+    }
+
+    /**
+     * @Route("/buscar-estoque", name="buscar-estoque")
+     * @Method({"GET", "POST"})
+     */
+    public function buscaEstoque(Request $request){
+
+        $term = $request->request->get('term');
+        $tipo_busca = $request->request->get('tipo_busca');
+
+        /*
+         * TIPO BUSCA
+         * 1 - Medicamento
+         * 2 - Princípio ativo
+         */
+        if($tipo_busca == 1){
+            $em = $this->getDoctrine()->getEntityManager();
+            $qb = $em->createQueryBuilder();
+            $meds = $qb->select('m')
+                ->from('AppBundle:Medicamento', 'm')
+                ->where('m.nome LIKE :term')
+                ->setParameter(':term', '%'.$term.'%')
+                ->getQuery()->getResult();
+
+        } elseif($tipo_busca == 2){
+            //IMPLEMENTAR BUSCA PA
+        }
+
+        $html = '
+        <table class="table table-hover">
+                                <tbody id="content-table">
+        ';
+
+        $html .= '
+            <tr>
+                <th>Nome</th>
+                <th>Apresentação</th>
+                <th>Princípio Ativo</th>
+                <th>Quantidade</th>
+                <th></th>
+            </tr>
+        ';
+
+        foreach ($meds as $med){
+            $html .= '
+                <tr>
+                    <td>'.$med->getNome().'</td>
+                    <td>'.$med->getApresentacao().'</td>
+                    <td>'.$med->getPrincipioAtivoCod()->getPrincipioAtivoNome().'</td>
+                    <td>'.$med->getQtd().'</td>
+                    <td style="text-align: right;">
+                        <a href="editar-principio-ativo/'.$med->getCod().'"><button type="button" style="padding: 1px 2px;" class="btn btn-warning btn-flat">Editar</button></a>
+                        <a href="deletar-principio-ativo/'.$med->getCod().'"><button type="button" style="padding: 1px 2px;" class="btn btn-danger btn-flat">Excluir</button></a>
+                    </td>
+                </tr>
+            ';
+        }
+
+        $html .= '
+        </tbody>
+        </table>
+        ';
+
+
+        return new JsonResponse($html);
     }
 }
