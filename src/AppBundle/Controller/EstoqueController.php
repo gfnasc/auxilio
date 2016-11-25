@@ -278,6 +278,7 @@ class EstoqueController extends Controller
             <b>Dados do medicamento</b><br><br>
             <b>Nome: </b>'.$med->getNome().'<br>
             <b>Apresentação: </b>'.$med->getApresentacao().'<br>
+            <b>Quantidade: </b>______<br>
             <b>Princípio Ativo: </b> '.$med->getPrincipioAtivoCod()->getPrincipioAtivoNome().'<br>
             <b>Data: </b>'.Carbon::now()->format('d/m/Y').'
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
