@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use DateTime;
+use HTML2PDF;
 use Symfony\Component\Validator\Constraints\Date;
 use Carbon\Carbon;
 
@@ -180,4 +181,116 @@ class EstoqueController extends Controller
 
     }
 
+    /**
+     * @Route("/solicitar-medicamentos", name="solicitar-medicamentos")
+     */
+    public function listarSolicitacaoEstoqueAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $medicamentos = $em->getRepository('AppBundle:Medicamento')->findAll();
+        $entradas = $em->getRepository('AppBundle:Entradas')->findAll();
+
+        return $this->render('system/estoque/solicitar-medicamentos.twig', [
+            'medicamentos' => $medicamentos,
+            'entradas' => $entradas
+        ]);
+    }
+
+    /**
+     * @Route("/buscar-estoque-solicitacao", name="buscar-estoque-solicitacao")
+     * @Method({"GET", "POST"})
+     */
+    public function buscaSolicitacaoEstoque(Request $request){
+
+        $term = $request->request->get('term');
+        $tipo_busca = $request->request->get('tipo_busca');
+
+        /*
+         * TIPO BUSCA
+         * 1 - Medicamento
+         * 2 - Princípio ativo
+         */
+        if($tipo_busca == 1){
+            $em = $this->getDoctrine()->getEntityManager();
+            $qb = $em->createQueryBuilder();
+            $meds = $qb->select('m')
+                ->from('AppBundle:Medicamento', 'm')
+                ->where('m.nome LIKE :term')
+                ->setParameter(':term', '%'.$term.'%')
+                ->getQuery()->getResult();
+
+        } elseif($tipo_busca == 2){
+            //IMPLEMENTAR BUSCA PA
+        }
+
+        $html = '
+        <table class="table table-hover">
+                                <tbody id="content-table">
+        ';
+
+        $html .= '
+            <tr>
+                <th>Nome</th>
+                <th>Apresentação</th>
+                <th>Princípio Ativo</th>
+                <th>Quantidade</th>
+                <th></th>
+            </tr>
+        ';
+
+        foreach ($meds as $med){
+            $html .= '
+                <tr>
+                    <td>'.$med->getNome().'</td>
+                    <td>'.$med->getApresentacao().'</td>
+                    <td>'.$med->getPrincipioAtivoCod()->getPrincipioAtivoNome().'</td>
+                    <td>'.$med->getQtd().'</td>
+                    <td style="text-align: right;">
+                        <a href="gerar-solicitacao/'.$med->getCod().'" target="_blank"><button type="button" style="padding: 1px 2px;" class="btn btn-success btn-flat">Solicitar</button></a>
+                    </td>
+                </tr>
+            ';
+        }
+
+        $html .= '
+        </tbody>
+        </table>
+        ';
+
+
+        return new JsonResponse($html);
+    }
+
+    /**
+     * @Route("/gerar-solicitacao/{id}", name="gerar-solicitacao")
+     * @Method({"GET", "POST"})
+     */
+    public function gerarSolicitacaoAction($id)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $med = $em->getRepository('AppBundle:Medicamento')->find($id);
+
+        $content = '
+            <h1 style="text-align: center;">HOSPITAL REGIONAL DE TEODORO SAMPAIO – SP</h1><br><br>
+            <h3 style="text-align: center;">Solictação de Medicamento</h3><br><br>
+            <b>Dados do medicamento</b><br><br>
+            <b>Nome: </b>'.$med->getNome().'<br>
+            <b>Apresentação: </b>'.$med->getApresentacao().'<br>
+            <b>Princípio Ativo: </b> '.$med->getPrincipioAtivoCod()->getPrincipioAtivoNome().'<br>
+            <b>Data: </b>'.Carbon::now()->format('d/m/Y').'
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <p style="text-align: center;">________________________________________________</p>
+            <p style="text-align: center;">Farmacêutico responsável</p>
+        ';
+
+
+        $html2pdf = new HTML2PDF('P','A4','pt', true, 'UTF-8', 10);
+        $html2pdf->setDefaultFont('Arial');
+        $html2pdf->WriteHTML($content);
+        $html2pdf->Output('pedido-medicamento-'.$med->getNome().'.pdf');
+
+
+    }
 }
