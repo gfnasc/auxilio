@@ -167,7 +167,6 @@ class MedicamentosController extends Controller
                     <td>'.$med->getNome().'</td>
                     <td style="text-align: right;">
                         <a href="editar-principio-ativo/'.$med->getCod().'"><button type="button" style="padding: 1px 2px;" class="btn btn-warning btn-flat">Editar</button></a>
-                        <a href="deletar-principio-ativo/'.$med->getCod().'"><button type="button" style="padding: 1px 2px;" class="btn btn-danger btn-flat">Excluir</button></a>
                     </td>
                 </tr>
             ';
