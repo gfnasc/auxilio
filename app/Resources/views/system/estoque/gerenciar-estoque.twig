@@ -17,7 +17,7 @@
             Buscar por:
             <select class="form-control" style="width: 200px;" id="tipo_busca">
                 <option value="1">Nome do Medicamento</option>
-                <option value="2">Pricípio Ativo</option>
+                <option value="2">Princípio Ativo</option>
             </select>
 
             <br>
@@ -60,7 +60,7 @@
                             <td>{{ med.qtd }}</td>
                             <td style="text-align: right;">
                                 <a href="{{ path('inserir-medicamentos', {'id' : med.cod}) }}"><button type="button" style="padding: 1px 2px;" class="btn btn-success btn-flat">Inserir</button></a>
-                                <a href="{{ path('lista-entradas', {'id' : med.cod}) }}"><button type="button" style="padding: 1px 2px;" class="btn btn-warning btn-flat">Entrdas já cadastradas</button></a>
+                                <a href="{{ path('lista-entradas', {'id' : med.cod}) }}"><button type="button" style="padding: 1px 2px;" class="btn btn-warning btn-flat">Entradas já cadastradas</button></a>
                             </td>
                         </tr>
                         {% endfor %}
