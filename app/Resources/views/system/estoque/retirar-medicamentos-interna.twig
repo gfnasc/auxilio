@@ -16,28 +16,28 @@
             
             <div class="box">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Entrada de Medicamentos - {{ medicamento.nome }}</h3>
+                    <h3 class="box-title">Retirada de Medicamentos - {{ medicamento.nome }}</h3>
                 </div>
                     <!-- form start -->
-                    <form role="form" method="post" action="{{ path('inserir-medicamentos', {'id' : medicamento.cod}) }}">
+                    <form role="form" method="post" action="{{ path('retirar-medicamentos-action', {'id' : medicamento.cod}) }}">
                       <div class="box-body">
-                        <div class="form-group">
-                          <label>Nº da Nota Fiscal</label>
-                          <input name="nf" type="text" class="form-control" id="numero-nf" placeholder="Digite o número da nota fiscal">
-                        </div>
-
                         <div class="form-group">
                           <label>Quantidade</label>
                           <input name="quantidade" type="text" class="form-control" id="qtd" placeholder="Digite a quantidade">
                         </div>
 
                         <div class="form-group">
-                          <label>Validade</label>
-                          <input name="validade" type="date" class="form-control" id="data-validade">
+                          <label>Paciente</label>
+                            <select class="form-control" name="paciente">
+                                <option>Selecione...</option>
+                                {% for pa in pacientes %}
+                                    <option value="{{ pa.cod }}">{{ pa.nome }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
 
                       <div class="box-footer">
-                        <button type="submit" class="btn btn-success btn-flat">Inserir</button>
+                        <button type="submit" class="btn btn-success btn-flat">Efetuar retirada</button>
                       </div>
                       </div>
                     </form>

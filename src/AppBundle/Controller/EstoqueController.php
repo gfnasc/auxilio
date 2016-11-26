@@ -4,7 +4,10 @@ namespace AppBundle\Controller;
 
 use AppBundle\AppBundle;
 use AppBundle\Entity\Entradas;
+use AppBundle\Entity\ItensRetirada;
 use AppBundle\Entity\Paciente;
+use AppBundle\Entity\Retiradas;
+use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -80,11 +83,6 @@ class EstoqueController extends Controller
                 'msg' => 'Entrada efetuada com sucesso!',
                 'medicamentos' => $medicamentos
             ]);
-
-//            return $this->redirectToRoute('entrada-medicamentos', [
-//                'msg' => 'Entrada efetuada com sucesso!',
-//                'medicamentos' => $medicamentos
-//            ]);
 
         }
 
@@ -286,12 +284,172 @@ class EstoqueController extends Controller
             <p style="text-align: center;">Farmacêutico responsável</p>
         ';
 
-
         $html2pdf = new HTML2PDF('P','A4','pt', true, 'UTF-8', 10);
         $html2pdf->setDefaultFont('Arial');
         $html2pdf->WriteHTML($content);
         $html2pdf->Output('pedido-medicamento-'.$med->getNome().'.pdf');
 
 
+    }
+
+    /**
+     * @Route("/retirar-medicamentos", name="retirar-medicamentos")
+     * @Method({"GET", "POST"})
+     */
+    public function retirarMedicamentosAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $medicamentos = $em->getRepository('AppBundle:Medicamento')->findAll();
+
+        return $this->render('system/estoque/retirar-medicamentos.twig', [
+            'medicamentos' => $medicamentos
+        ]);
+
+    }
+
+    /**
+     * @Route("/retirar-medicamentos-interna/{id}", name="retirar-medicamentos-interna")
+     * @Method({"GET", "POST"})
+     */
+    public function retirarMedicamentoAction($id)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $medicamento = $em->getRepository('AppBundle:Medicamento')->find($id);
+        $pacientes = $em->getRepository('AppBundle:Paciente')->findAll();
+
+        return $this->render('system/estoque/retirar-medicamentos-interna.twig', [
+            'medicamento' => $medicamento,
+            'pacientes' => $pacientes
+        ]);
+
+    }
+
+    /**
+     * @Route("/retirar-medicamentos-action/{id}", name="retirar-medicamentos-action")
+     * @Method({"GET", "POST"})
+     */
+    public function retirarMedicamento(Request $request, $id)
+    {
+
+        $data = $request->request->all();
+        $em = $this->getDoctrine()->getManager();
+
+        //Valida se existe a quantidade de medicamentos que está sendo solicitada na retirada.
+        $m = $em->getRepository('AppBundle:Medicamento')->find($id);
+        if($data['quantidade'] > (integer)$m->getQtd()){
+            $medicamentos = $em->getRepository('AppBundle:Medicamento')->findAll();
+
+            return $this->render('system/estoque/retirar-medicamentos.twig', [
+                'medicamentos' => $medicamentos,
+                'msg_fail' => 'Erro - Quantidade insuficiente no estoque!'
+            ]);
+        }
+
+        //Subtrai do estoque
+        if($data['quantidade'] <= (integer)$m->getQtd()){
+            $nova_qtd = (integer)$m->getQtd() - (integer)$data['quantidade'];
+            $m->setQtd($nova_qtd);
+            $em->flush();
+        }
+
+        $retiradas = new Retiradas();
+        $itens = new ItensRetirada();
+
+        //preenche retiradas
+        $retiradas->setData(Carbon::now()->toDateString());
+        $retiradas->setOperadorCod($em->getReference('AppBundle:Operador', 1));
+        $retiradas->setPacienteCod($em->getReference('AppBundle:Paciente', $data['paciente']));
+        $em->persist($retiradas);
+        $em->flush();
+
+        $qb = $em->createQueryBuilder();
+        $ultima_retirada = $qb->select('r')
+            ->from('AppBundle:Retiradas', 'r')
+            ->orderBy('r.cod', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()->getResult();
+
+        //preenche intens retirada
+        $itens->setMedicamentoCod($em->getReference('AppBundle:Medicamento', $id));
+        $itens->setQtdRetirada($data['quantidade']);
+        $itens->setRetiradasCod($em->getReference('AppBundle:Retiradas', $ultima_retirada[0]->getCod()));
+
+        $em->persist($itens);
+        $em->flush();
+
+        $medicamentos = $em->getRepository('AppBundle:Medicamento')->findAll();
+
+        return $this->render('system/estoque/retirar-medicamentos.twig', [
+            'medicamentos' => $medicamentos,
+            'msg' => 'Retirada efetuada com sucesso!'
+        ]);
+
+    }
+
+    /**
+     * @Route("/buscar-retirada", name="buscar-retirada")
+     * @Method({"GET", "POST"})
+     */
+    public function buscaRetiradaEstoque(Request $request){
+
+        $term = $request->request->get('term');
+        $tipo_busca = $request->request->get('tipo_busca');
+
+        /*
+         * TIPO BUSCA
+         * 1 - Medicamento
+         * 2 - Princípio ativo
+         */
+        if($tipo_busca == 1){
+            $em = $this->getDoctrine()->getEntityManager();
+            $qb = $em->createQueryBuilder();
+            $meds = $qb->select('m')
+                ->from('AppBundle:Medicamento', 'm')
+                ->where('m.nome LIKE :term')
+                ->setParameter(':term', '%'.$term.'%')
+                ->getQuery()->getResult();
+
+        } elseif($tipo_busca == 2){
+            //IMPLEMENTAR BUSCA PA
+        }
+
+        $html = '
+        <table class="table table-hover">
+                                <tbody id="content-table">
+        ';
+
+        $html .= '
+            <tr>
+                <th>Nome</th>
+                <th>Apresentação</th>
+                <th>Princípio Ativo</th>
+                <th>Quantidade</th>
+                <th></th>
+            </tr>
+        ';
+
+        foreach ($meds as $med){
+            $html .= '
+                <tr>
+                    <td>'.$med->getNome().'</td>
+                    <td>'.$med->getApresentacao().'</td>
+                    <td>'.$med->getPrincipioAtivoCod()->getPrincipioAtivoNome().'</td>
+                    <td>'.$med->getQtd().'</td>
+                    <td style="text-align: right;">
+                        <a href="retirar-medicamentos-interna/'.$med->getCod().'"><button type="button" style="padding: 1px 2px;" class="btn btn-success btn-flat">Efetuar retirada</button></a>
+                    </td>
+                </tr>
+            ';
+        }
+
+        $html .= '
+        </tbody>
+        </table>
+        ';
+
+
+        return new JsonResponse($html);
     }
 }

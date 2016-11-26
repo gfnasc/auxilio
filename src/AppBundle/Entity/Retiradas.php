@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 /**
  * Retiradas
@@ -24,7 +25,7 @@ class Retiradas
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="data", type="date", nullable=false)
+     * @ORM\Column(name="data", type="datetime", nullable=false)
      */
     private $data;
 
@@ -69,7 +70,7 @@ class Retiradas
      */
     public function setData($data)
     {
-        $this->data = $data;
+        $this->data = DateTime::createFromFormat('Y-m-d', $data, new \DateTimeZone('America/Sao_Paulo'));;
 
         return $this;
     }
